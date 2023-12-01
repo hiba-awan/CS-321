@@ -1,0 +1,29 @@
+name: Deployment Workflow
+
+on:
+  push:
+    branches:
+      - main # Deploy on changes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11' # Adjust as needed
+
+      - name: Build and package JavaFX application
+        run: |
+          mvn clean package
+
+      - name: Deploy to server
+        run: |
+          # Add deployment commands here (e.g., SCP, SSH, etc.)
+          # Example: scp target/your-application.jar user@your-server:/path/to/deployment
+
